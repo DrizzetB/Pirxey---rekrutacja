@@ -1,12 +1,12 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
-export class HomePage {
-    readonly page: Page;
+export class HomePage extends BasePage{
     readonly mainHeading: Locator;
 
     constructor(page: Page) {
-        this.page = page;
-
+        super(page);
+        
         this.mainHeading = page.locator('#heroHeading');
     }
 

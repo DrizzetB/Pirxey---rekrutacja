@@ -11,7 +11,7 @@ export class HomePage extends BasePage{
     }
 
     async goto() {
-        await this.page.goto('https://www.widelab.co');
+        await this.page.goto('/');
     }
 
     async expectMainHeadingVisible() {

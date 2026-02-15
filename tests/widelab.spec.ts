@@ -41,7 +41,7 @@ test.describe('Assertion tests for widelab.co', () => {
 
 test.describe('Visual Regression tests', () => {
   for (const subpage of HomePage.topNavigationSubpages) {
-    test.only(`should match screenshot for ${subpage} page`, async ({ page }) => {
+    test(`should match screenshot for ${subpage} page`, async ({ page }) => {
       const homePage = new HomePage(page);
 
       await homePage.goto();

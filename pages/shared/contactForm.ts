@@ -27,7 +27,7 @@ export function createContactFormLocators(page: Page): ContactFormLocators {
     productDesign: form.locator('[for="Product-Design"]'),
     website: form.locator('[for="Website"]'),
     development: form.locator('[for="Development"]'),
-    branding: form.locator('[for="Branding"]'),
+    branding: form.locator('[for="branding"]'),
     marketing: form.locator('[for="Marketing"]'),
   };
   const contactFormFields: ContactFormFields = {

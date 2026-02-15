@@ -50,3 +50,11 @@ export async function expectAllNavigationElementsVisible(locators: TopNavigation
     await expect(locator, `${name} link should be visible`).toBeVisible();
   }
 }
+
+export async function clickTopNavigationContact(
+    page: Page,
+    locators: TopNavigationLocators
+) {
+    await locators.contact.click();
+    await page.waitForLoadState('domcontentloaded');
+}

@@ -2,6 +2,10 @@ import { expect, type Locator, type Page } from '@playwright/test';
 
 export type ContactFormCheckboxInputs = {
   productDesign: Locator;
+  website: Locator;
+  development: Locator;
+  branding: Locator;
+  marketing: Locator;
 };
 
 export type ContactFormFields = {
@@ -21,6 +25,10 @@ export function createContactFormLocators(page: Page): ContactFormLocators {
   const form = page.locator('#contact-form');
   const checkboxInputs: ContactFormCheckboxInputs = {
     productDesign: form.locator('[for="Product-Design"]'),
+    website: form.locator('[for="Website"]'),
+    development: form.locator('[for="Development"]'),
+    branding: form.locator('[for="Branding"]'),
+    marketing: form.locator('[for="Marketing"]'),
   };
   const contactFormFields: ContactFormFields = {
     email: form.locator('#contact-email'),

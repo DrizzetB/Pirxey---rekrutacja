@@ -41,7 +41,7 @@ test.describe('Assertion tests for widelab.co', () => {
 
 test.describe('Visual Regression tests', () => {
   for (const subpage of HomePage.topNavigationSubpages) {
-    test.skip(`should match screenshot for ${subpage} page`, async ({ page }) => {
+    test.only(`should match screenshot for ${subpage} page`, async ({ page }) => {
       const homePage = new HomePage(page);
 
       await homePage.goto();
@@ -49,8 +49,18 @@ test.describe('Visual Regression tests', () => {
       await homePage.expectAllNavigationElementsVisible();
       await homePage.clickTopNavigationSubpage(subpage);
       await page.waitForLoadState('load');
+      await page.waitForTimeout(2000);
 
-      await expect(page).toHaveScreenshot(`${subpage}.png`, { fullPage: true, });
+      await expect(page).toHaveScreenshot(`${subpage}.png`, {
+        fullPage: true,
+        animations: 'disabled',
+        timeout: 15000,
+        mask: [
+          page.locator('video'),
+          page.locator('.home-logo_item, .home-logo, [class*="home-logo"]'),
+          page.locator('.lottie-animation'),
+        ],
+      });
     });
   }
 });

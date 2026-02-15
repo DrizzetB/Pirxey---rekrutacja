@@ -25,7 +25,7 @@ test.describe('Assertion tests for widelab.co', () => {
         await blogPage.goto();
 
         await blogPage.expectCatGifVisible();
-        await blogPage.expectCatGifLoops();
+        await blogPage.expectCatGifLoopsAndHasValidSource();
     });
 
     test('Contact form has expected fields', async ({ page }) => {

@@ -18,7 +18,19 @@ export class BlogPage extends BasePage {
     await expect(this.catGif).toBeVisible();
   }
 
-  async expectCatGifLoops() {
+  async expectCatGifLoopsAndHasValidSource() {
     await expect(this.catGif).toHaveAttribute('loop', 'true');
+    const mediaSource = await this.catGif.evaluate((element) => {
+      const video = element as HTMLVideoElement;
+      return (
+        video.currentSrc ||
+        video.getAttribute('src') ||
+        video.querySelector('source')?.getAttribute('src') ||
+        ''
+      );
+    });
+
+    expect(mediaSource).not.toEqual('');
+    expect(mediaSource).toMatch(/\.(mp4|webm|mov)(\?.*)?$/i);
   }
 };

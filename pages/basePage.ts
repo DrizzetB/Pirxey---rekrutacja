@@ -1,11 +1,14 @@
 import type { Page } from '@playwright/test';
 import {
   clickTopNavigationContact,
+  clickTopNavigationSubpage,
   createTopNavigationLocators,
   expectAllNavigationElementsVisible,
   expectHomeNavigationVisible,
+  topNavigationSubpages,
   type TopNavigationLinks,
   type TopNavigationLocators,
+  type TopNavigationSubpage,
 } from './shared/topNavigation';
 import {
   createContactFormLocators,
@@ -16,6 +19,8 @@ import {
 } from './shared/contactForm';
 
 export class BasePage {
+  static readonly topNavigationSubpages = topNavigationSubpages;
+
   readonly page: Page;
   readonly navigation: TopNavigationLocators;
   readonly topNavigationLinks: TopNavigationLinks;
@@ -35,9 +40,13 @@ export class BasePage {
   async expectAllNavigationElementsVisible() {
     await expectAllNavigationElementsVisible(this.navigation);
   }
-
-    async clickTopNavigationContact() {
+  
+  async clickTopNavigationContact() {
     await clickTopNavigationContact(this.page, this.navigation);
+  }
+
+  async clickTopNavigationSubpage(subpage: TopNavigationSubpage) {
+    await clickTopNavigationSubpage(this.page, this.topNavigationLinks[subpage]);
   }
 
   async expectContactFormVisible() {

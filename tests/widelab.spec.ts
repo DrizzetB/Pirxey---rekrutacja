@@ -38,3 +38,19 @@ test.describe('Assertion tests for widelab.co', () => {
         await homePage.expectContactFormSubmitVisible();
     });
 });
+
+test.describe('Visual Regression tests', () => {
+  for (const subpage of HomePage.topNavigationSubpages) {
+    test.skip(`should match screenshot for ${subpage} page`, async ({ page }) => {
+      const homePage = new HomePage(page);
+
+      await homePage.goto();
+      await homePage.expectHomeNavigationVisible();
+      await homePage.expectAllNavigationElementsVisible();
+      await homePage.clickTopNavigationSubpage(subpage);
+      await page.waitForLoadState('load');
+
+      await expect(page).toHaveScreenshot(`${subpage}.png`, { fullPage: true, });
+    });
+  }
+});

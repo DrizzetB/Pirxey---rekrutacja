@@ -34,3 +34,19 @@ export function createTopNavigationLocators(page: Page): TopNavigationLocators {
     contact,
   };
 }
+
+export async function expectHomeNavigationVisible(locators: TopNavigationLocators) {
+  await expect(locators.home).toBeVisible();
+}
+
+export async function expectTopNavigationVisible(locators: TopNavigationLocators) {
+  await expect(locators.navbarMenu).toBeVisible();
+}
+
+export async function expectAllNavigationElementsVisible(locators: TopNavigationLocators) {
+  await expectTopNavigationVisible(locators);
+
+  for (const [name, locator] of Object.entries(locators.topNavigationLinks)) {
+    await expect(locator, `${name} link should be visible`).toBeVisible();
+  }
+}

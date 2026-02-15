@@ -1,6 +1,8 @@
 import type { Page } from '@playwright/test';
 import {
   createTopNavigationLocators,
+  expectAllNavigationElementsVisible,
+  expectHomeNavigationVisible,
   type TopNavigationLinks,
   type TopNavigationLocators,
 } from './shared/topNavigation';
@@ -14,5 +16,13 @@ export class BasePage {
     this.page = page;
     this.navigation = createTopNavigationLocators(page);
     this.topNavigationLinks = this.navigation.topNavigationLinks;
+  }
+
+  async expectHomeNavigationVisible() {
+    await expectHomeNavigationVisible(this.navigation);
+  }
+
+  async expectAllNavigationElementsVisible() {
+    await expectAllNavigationElementsVisible(this.navigation);
   }
 }

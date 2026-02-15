@@ -25,5 +25,6 @@ test.describe('Assertion tests for widelab.co', () => {
         await blogPage.goto();
 
         await blogPage.expectCatGifVisible();
+        await blogPage.expectCatGifLoops();
   });
 });

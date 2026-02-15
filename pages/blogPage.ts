@@ -17,4 +17,8 @@ export class BlogPage extends BasePage {
   async expectCatGifVisible() {
     await expect(this.catGif).toBeVisible();
   }
+
+  async expectCatGifLoops() {
+    await expect(this.catGif).toHaveAttribute('loop', 'true');
+  }
 };

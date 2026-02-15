@@ -26,7 +26,7 @@ export const topNavigationSubpages: TopNavigationSubpage[] = [
 export function createTopNavigationLocators(page: Page): TopNavigationLocators {
   const home = page.locator('#heroNavbarBranding');
   const navbarMenu = page.locator('xpath=/html/body/div[@class="page-wrapper"]/div[@id="heroNavbar"]'); // Xpath
-  const contact = page.locator('//div[@class="button_small is-navbar"]/div[@class="link is-p-l"]/div[contains(text(),"Get in touch")]'); // rel XPath
+  const contact = page.locator('//div[@class="button_small is-navbar"]/div[@class="link is-p-l"]/div[contains(text(),"Get in touch")]'); // rel Xpath
 
   const topNavigationLinks: TopNavigationLinks = {
     caseStudies: navbarMenu.locator('a:has-text("Case studies")'),

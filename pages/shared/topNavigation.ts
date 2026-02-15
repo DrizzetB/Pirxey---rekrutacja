@@ -14,11 +14,19 @@ export type TopNavigationLinks = {
   blog: Locator;
 };
 
+export type TopNavigationSubpage = keyof TopNavigationLinks;
+
+export const topNavigationSubpages: TopNavigationSubpage[] = [
+  'caseStudies',
+  'services',
+  'clients',
+  'blog',
+];
 
 export function createTopNavigationLocators(page: Page): TopNavigationLocators {
   const home = page.locator('#heroNavbarBranding');
   const navbarMenu = page.locator('xpath=/html/body/div[@class="page-wrapper"]/div[@id="heroNavbar"]'); // Xpath
-  const contact = page.locator('//div[@class="button_small is-navbar"]/div[@class="link is-p-l"]/div[contains(text(),"Get in touch")]'); // rel XPath
+  const contact = page.locator('//div[@class="button_small is-navbar"]/div[@class="link is-p-l"]/div[contains(text(),"Get in touch")]'); // rel Xpath
 
   const topNavigationLinks: TopNavigationLinks = {
     caseStudies: navbarMenu.locator('a:has-text("Case studies")'),
@@ -57,4 +65,21 @@ export async function clickTopNavigationContact(
 ) {
     await locators.contact.click();
     await page.waitForLoadState('domcontentloaded');
+}
+
+export async function clickTopNavigationSubpage(
+  page: Page,
+  targetLink: Locator
+) {
+  const href = await targetLink.getAttribute('href');
+
+  await Promise.all([
+    targetLink.click(),
+    page.waitForURL((url) => {
+      if (!href) return true;
+      return url.pathname === new URL(href, page.url()).pathname;
+    }),
+  ]);
+
+  await page.waitForLoadState('domcontentloaded');
 }

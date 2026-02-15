@@ -12,6 +12,7 @@ test.describe('Visual Regression tests', () => {
       await homePage.clickTopNavigationSubpage(subpage);
       await page.waitForLoadState('load');
 
+      // TODO clean up, move as method to utils, add TIMEOUT_SNAPSHOT variable
       await expect(page).toHaveScreenshot(`${subpage}.png`, {
         fullPage: true,
         animations: 'disabled',
